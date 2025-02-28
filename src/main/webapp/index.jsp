@@ -6,6 +6,7 @@
 <body>
     <h1>Hello from Jenkins!</h1>
     <p>This is a simple web application deployed via Jenkins.</p>
-     <p>My name is veeresh.</p>
+     <p>My name is veeresh.</p
+     <p>Hello world</p>
 </body>
 </html>
