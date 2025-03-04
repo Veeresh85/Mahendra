@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'YOUR_GIT_CREDENTIALS_ID', url: 'YOUR_GIT_REPOSITORY_URL'
+                git branch: 'main', credentialsId: '62792590-251b-4e78-96f9-9440cce97eeb', url: 'https://github.com/Veeresh85/My-Jenkins-project.git'
             }
         }
         stage('Build') {
