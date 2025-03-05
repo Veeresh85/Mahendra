@@ -24,14 +24,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo "Deploying to VMware environment..."'
-                // Add your deployment steps here.
-                // Example: Deploying a WAR file to Tomcat
-                // You will need to make sure tomcat is running, and the correct ports are open.
-                sh 'scp target/*.war veeresh@localhost:/home/veeresh/apache-tomcat-9.0.99/webapps/'
-                // Example: Restart tomcat.
-                sshagent (credentials: ['YOUR_SSH_CREDENTIALS_ID']) {
-                    sh 'ssh veeresh@localhost "/home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh"'
-                    sh 'ssh veeresh@localhost "/home/veeresh/apache-tomcat-9.0.99/bin/startup.sh"'
+                sh 'scp target/*.war http://192.168.152.128:9090:/home/veeresh/apache-tomcat-9.0.99/webapps/'
+                sshagent (credentials: ['192.168.152.128']) {
+                    sh 'http://192.168.152.128 "/home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh"'
+                    sh 'ssh http://192.168.152.128 "/home/veeresh/apache-tomcat-9.0.99/bin/startup.sh"'
                 }
             }
         }
