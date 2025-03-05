@@ -25,9 +25,8 @@ pipeline {
             steps {
                 sh 'echo "Deploying to VMware environment..."'
                 sh 'scp target/*.war http://192.168.152.128:9090:/home/veeresh/apache-tomcat-9.0.99/webapps/'
-                sshagent (credentials: ['192.168.152.128']) {
-                    sh 'http://192.168.152.128:9090:/home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh'
-                    sh 'ssh http://192.168.152.128:9090:/home/veeresh/apache-tomcat-9.0.99/bin/startup.sh'
+                sh '/home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh'
+                sh '/home/veeresh/apache-tomcat-9.0.99/bin/startup.sh'
                 }
             }
         }
