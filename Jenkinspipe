@@ -23,10 +23,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo "Deploying to VMware environment..."'
-                sh 'scp target/*.war /home/veeresh/apache-tomcat-9.0.99/webapps/'
-                sh '/home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh'
-                sh '/home/veeresh/apache-tomcat-9.0.99/bin/startup.sh'
+                """"
+                sh echo "Deploying to VMware environment..."
+                sh scp target/*.war /home/veeresh/apache-tomcat-9.0.99/webapps/
+                sh /home/veeresh/apache-tomcat-9.0.99/bin/shutdown.sh
+                sh /home/veeresh/apache-tomcat-9.0.99/bin/startup.sh
+                """"
                 }
             }
         }
