@@ -16,33 +16,33 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh "mvn clean package"
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh "mvn test"
             }
         }
 
         stage('Deploy to Tomcat') {
             steps {
-                sh 'cp target/*.war apache-tomcat-9.0.99/webapps/'
+                sh "cp target/*.war apache-tomcat-9.0.99/webapps/"
                 sh "echo $?"
-                sh 'sudo apache-tomcat-9.0.99/bin/shutdown.sh || true'
+                sh "sudo apache-tomcat-9.0.99/bin/shutdown.sh || true"
                 sleep(time:10, unit:'SECONDS')
-                sh 'sudo apache-tomcat-9.0.99/bin/startup.sh'
+                sh "sudo apache-tomcat-9.0.99/bin/startup.sh"
             }
         }
     }
 
     post {
         success {
-            echo 'Deployment successful!'
+            echo "Deployment successful!"
         }
         failure {
-            echo 'Build or deployment failed!'
+            echo "Build or deployment failed!"
         }
     }
 }
