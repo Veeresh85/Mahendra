@@ -28,9 +28,9 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                sh "whoami"
-                sh "pwd"
-                sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
+                sh 'ls -l /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
+                sh 'ls -ld /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project'
+                sh 'cp target/*.war ${TOMCAT_HOME}/webapps/'
                 sh "${TOMCAT_HOME}/bin/startup.sh"
             }
         }
