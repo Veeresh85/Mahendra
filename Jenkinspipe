@@ -28,6 +28,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
+                sh "whoami"
                 sh "pwd"
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
                 sh "${TOMCAT_HOME}/bin/startup.sh"
