@@ -28,10 +28,11 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                sh "cp target/*.war apache-tomcat-9.0.99/webapps/"
-                sh "sudo apache-tomcat-9.0.99/bin/shutdown.sh || true"
+                sh "pwd"
+                sh "cp target/*.war TOMCAT_HOME/webapps/"
+                sh "TOMCAT_HOME/bin/shutdown.sh || true"
                 sleep(time:10, unit:'SECONDS')
-                sh "sudo apache-tomcat-9.0.99/bin/startup.sh"
+                sh "TOMCAT_HOME/bin/startup.sh"
             }
         }
     }
