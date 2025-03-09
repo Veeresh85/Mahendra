@@ -28,13 +28,9 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                sh """""
-                pwd
-                cp target/*.war ${TOMCAT_HOME}/webapps/
-                {TOMCAT_HOME}bin/shutdown.sh || true
-                sleep(time:10, unit:'SECONDS')
-                {TOMCAT_HOME}/bin/startup.sh
-                """""
+                sh "pwd"
+                sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
+                sh "{TOMCAT_HOME}/bin/startup.sh"
             }
         }
     }
