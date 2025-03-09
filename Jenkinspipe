@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-repo.git' // Change repo URL
+                git branch: 'main', url: 'https://github.com/Veeresh85/My-Jenkins-project.git' 
             }
         }
 
@@ -28,10 +28,10 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                sh 'cp target/*.war $TOMCAT_HOME/webapps/' // Adjust war file name if necessary
-                sh '$TOMCAT_HOME/bin/shutdown.sh || true' // Stop Tomcat (ignore errors)
-                sh '$TOMCAT_HOME/bin/startup.sh' // Restart Tomcat
-            }
+                sh 'cp target/*.war $TOMCAT_HOME/webapps/'  
+                sh '$TOMCAT_HOME/bin/shutdown.sh || true'  
+                sleep(time:10, unit:"SECONDS")  
+                sh '$TOMCAT_HOME/bin/startup.sh'
         }
     }
 
