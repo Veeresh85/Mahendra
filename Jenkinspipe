@@ -29,7 +29,6 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 sh "cp target/*.war apache-tomcat-9.0.99/webapps/"
-                sh "echo $?"
                 sh "sudo apache-tomcat-9.0.99/bin/shutdown.sh || true"
                 sleep(time:10, unit:'SECONDS')
                 sh "sudo apache-tomcat-9.0.99/bin/startup.sh"
