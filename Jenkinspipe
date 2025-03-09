@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
-                sh "{TOMCAT_HOME}/bin/startup.sh"
+                sh "${TOMCAT_HOME}/bin/startup.sh"
             }
         }
     }
