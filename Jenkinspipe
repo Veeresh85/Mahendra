@@ -16,21 +16,24 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "mvn clean package"
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                sh "mvn test"
+                sh 'mvn test'
             }
         }
 
         stage('Deploy to Tomcat') {
             steps {
+                sh 'sudo chown jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
+                sh 'sudo chown -R jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project'
+                sh 'sudo chmod 775 /home/veeresh/apache-tomcat-9.0.99/webapps'
                 sh 'ls -l /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
                 sh 'ls -ld /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project'
-                sh 'cp target/*.war ${TOMCAT_HOME}/webapps/'
+                sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
                 sh "${TOMCAT_HOME}/bin/startup.sh"
             }
         }
@@ -38,10 +41,10 @@ pipeline {
 
     post {
         success {
-            echo "Deployment successful!"
+            echo 'Deployment successful!'
         }
         failure {
-            echo "Build or deployment failed!"
+            echo 'Build or deployment failed!'
         }
     }
 }
