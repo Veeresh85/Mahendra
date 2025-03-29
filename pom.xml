@@ -13,7 +13,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>4.13.2</junit.version>
          <sonar.host.url>http://192.168.152.129:9000</sonar.host.url>
-         <sonar.login>sqa_420b8172f46d88658ee08f679690af4b0d41e550</sonar.login>
+         <sonar.login>sqa_b2139fb143350a38f495d84b94d1630ce6d71031</sonar.login>
     </properties>
 
     <dependencies>
