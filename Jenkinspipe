@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean sonar:sonar package -Dsonar.login=sqa_420b8172f46d88658ee08f679690af4b0d41e550'
+                sh 'mvn clean package'
             }
         }
 
