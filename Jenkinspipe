@@ -40,7 +40,7 @@ pipeline {
         protocol: 'http',
         repository: 'veeersh-snapshot',
         version: '1.0-SNAPSHOT'
-        }
+            }
         }    
         stage('Deploy to Tomcat') {
             steps {
