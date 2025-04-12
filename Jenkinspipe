@@ -30,7 +30,7 @@ pipeline {
         nexusArtifactUploader artifacts: [[
             artifactId: 'my-jenkins-project',
             classifier: '',
-            file: 'target/my-jenkins-project.1.0-SNAPSHOT.war',
+            file: 'target/*.war',
             type: 'war'
         ]],
         credentialsId: '99065792-794c-4254-8659-075e6bfad8e9',
