@@ -33,7 +33,7 @@ pipeline {
             file: 'target/my-jenkins-project.war',
             type: 'war'
         ]],
-        credentialsId: '99065792-794c-4254-8659-075e6bfad8e9',
+        credentialsId: 'nexus3',
         groupId: 'com.example',
         nexusUrl: '192.168.152.129:8081/',
         nexusVersion: 'nexus3',
