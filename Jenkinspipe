@@ -27,6 +27,7 @@ pipeline {
         }
         stage('Upload to Nexus') {
     steps {
+        sleep 10
         nexusArtifactUploader artifacts: [[
             artifactId: 'my-jenkins-project',
             classifier: '',
@@ -38,9 +39,10 @@ pipeline {
         nexusUrl: '192.168.152.129:8081/',
         nexusVersion: 'nexus3',
         protocol: 'http',
-        repository: 'veeersh-snapshot'
-            }
-        }    
+        repository: 'veeersh-snapshot',
+        version: '1.0-SNAPSHOT'
+    }
+}  
         stage('Deploy to Tomcat') {
             steps {
                sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
