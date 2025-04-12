@@ -25,7 +25,23 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
+        stage('Upload to Nexus') {
+    steps {
+        nexusArtifactUploader artifacts: [[
+            artifactId: 'my-jenkins-project',
+            classifier: '',
+            file: 'target/my-jenkins-project.1.0-SNAPSHOT.war',
+            type: 'war'
+        ]],
+        credentialsId: '99065792-794c-4254-8659-075e6bfad8e9',
+        groupId: 'com.example',
+        nexusUrl: 'http://192.168.152.129:8081/',
+        nexusVersion: 'nexus3',
+        protocol: 'http',
+        repository: 'veeersh-snapshot',
+        version: '1.0-SNAPSHOT'
+        }
+        }    
         stage('Deploy to Tomcat') {
             steps {
                sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
