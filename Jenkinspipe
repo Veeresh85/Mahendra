@@ -35,7 +35,7 @@ pipeline {
         ]],
         credentialsId: '99065792-794c-4254-8659-075e6bfad8e9',
         groupId: 'com.example',
-        nexusUrl: 'http://192.168.152.129:8081/',
+        nexusUrl: '192.168.152.129:8081/',
         nexusVersion: 'nexus3',
         protocol: 'http',
         repository: 'veeersh-snapshot',
