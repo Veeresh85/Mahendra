@@ -38,8 +38,7 @@ pipeline {
         nexusUrl: '192.168.152.129:8081/',
         nexusVersion: 'nexus3',
         protocol: 'http',
-        repository: 'veeersh-snapshot',
-        version: '1.0-SNAPSHOT'
+        repository: 'veeersh-snapshot'
             }
         }    
         stage('Deploy to Tomcat') {
