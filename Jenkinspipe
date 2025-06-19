@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean deploy'
+                sh "${MAVEN_HOME}/bin/mvn clean deploy"
             }
         }
 
