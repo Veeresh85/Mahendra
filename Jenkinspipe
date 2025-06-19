@@ -4,7 +4,7 @@ pipeline {
     environment {
         MAVEN_HOME = '/usr/share/maven'
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-        TOMCAT_HOME = '/home/veeresh/apache-tomcat-9.0.99'
+        TOMCAT_HOME = '/opt/apache-tomcat-10.1.41'
     }
 
     stages {
@@ -25,30 +25,13 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Upload to Nexus') {
-        steps {
-        nexusArtifactUploader artifacts: [[
-            artifactId: 'my-jenkins-project',
-            classifier: '',
-            file: 'target/my-jenkins-project.war',
-            type: 'war'
-        ]],
-        credentialsId: 'nexus5',
-        groupId: 'com.example',
-        nexusUrl: '192.168.152.129:8081',
-        nexusVersion: 'nexus3',
-        protocol: 'http',
-        repository: 'veeersh-snapshot',
-        version: '1.0-SNAPSHOT'
-            }
-        }
-        stage('Deploy to Tomcat') {
+       stage('Deploy to Tomcat') {
             steps {
-               sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
-                sh 'echo "veeresh" | sudo -S chown -R jenkins:jenkins /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project'
-                sh 'echo "veeresh" | sudo -S chmod 775 /home/veeresh/apache-tomcat-9.0.99/webapps'
-                sh 'ls -l /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project.war'
-                sh 'ls -ld /home/veeresh/apache-tomcat-9.0.99/webapps/my-jenkins-project'
+               sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
+                sh 'echo "veeresh" | sudo -S chown -R jenkins:jenkins /h\opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
+                sh 'echo "veeresh" | sudo -S chmod 777 /home/veeresh/apache-tomcat-9.0.99/webapps'
+                sh 'ls -l /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
+                sh 'ls -ld /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
                 sh "${TOMCAT_HOME}/bin/startup.sh"
             }
