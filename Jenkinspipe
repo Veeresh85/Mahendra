@@ -28,7 +28,7 @@ pipeline {
        stage('Deploy to Tomcat') {
             steps {
                sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
-                sh 'echo "veeresh" | sudo -S chown -R jenkins:jenkins /h\opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
+                sh 'echo "veeresh" | sudo -S chown -R jenkins:jenkins /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
                 sh 'echo "veeresh" | sudo -S chmod 777 /home/veeresh/apache-tomcat-9.0.99/webapps'
                 sh 'ls -l /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
                 sh 'ls -ld /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
