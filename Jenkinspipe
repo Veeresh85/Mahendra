@@ -42,7 +42,7 @@ pipeline {
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
 
                 // Start Tomcat
-                sh "${TOMCAT_HOME}/bin/startup.sh"
+                sh 'echo "veeresh" | sudo -S ${TOMCAT_HOME}/bin/startup.sh'
             }
         }
     }
