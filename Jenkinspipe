@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Veeresh85/My-Jenkins-project.git'
+                git branch: 'main', credentialsId: 'a54b60a0-9355-42ad-8480-3df0d80408a4', url: 'https://github.com/Veeresh85/Mahendra.git'
             }
         }
 
