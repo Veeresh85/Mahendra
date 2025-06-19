@@ -29,14 +29,14 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 // Make sure Tomcat is stopped before deployment
-                sh "echo 'veeresh' | sudo -S ${TOMCAT_HOME}/bin/shutdown.sh || true"
+                sh "sudo -S ${TOMCAT_HOME}/bin/shutdown.sh || true"
 
                 // Change ownership if necessary
-                sh "echo 'veeresh' | sudo -S chown jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project.war || true"
-                sh "echo 'veeresh' | sudo -S chown -R jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project || true"
+                sh "sudo -S chown jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project.war || true"
+                sh "sudo -S chown -R jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project || true"
 
                 // Ensure proper permission
-                sh "echo 'veeresh' | sudo -S chmod 755 ${TOMCAT_HOME}/webapps"
+                sh "sudo -S chmod 755 ${TOMCAT_HOME}/webapps"
 
                 // Deploy WAR
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
