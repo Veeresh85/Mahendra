@@ -22,17 +22,26 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh "${MAVEN_HOME}/bin/mvn test"
             }
         }
-       stage('Deploy to Tomcat') {
+
+        stage('Deploy to Tomcat') {
             steps {
-               sh 'echo "veeresh" | sudo -S chown jenkins:jenkins /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
-                sh 'echo "veeresh" | sudo -S chown -R jenkins:jenkins /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
-                sh 'echo "veeresh" | sudo -S chmod 777 /home/veeresh/apache-tomcat-9.0.99/webapps'
-                sh 'ls -l /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project.war'
-                sh 'ls -ld /opt/apache-tomcat-10.1.41/webapps/my-jenkins-project'
+                // Make sure Tomcat is stopped before deployment
+                sh "echo 'veeresh' | sudo -S ${TOMCAT_HOME}/bin/shutdown.sh || true"
+
+                // Change ownership if necessary
+                sh "echo 'veeresh' | sudo -S chown jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project.war || true"
+                sh "echo 'veeresh' | sudo -S chown -R jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project || true"
+
+                // Ensure proper permission
+                sh "echo 'veeresh' | sudo -S chmod 755 ${TOMCAT_HOME}/webapps"
+
+                // Deploy WAR
                 sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
+
+                // Start Tomcat
                 sh "${TOMCAT_HOME}/bin/startup.sh"
             }
         }
@@ -40,10 +49,10 @@ pipeline {
 
     post {
         success {
-            echo 'Deployment successful!'
+            echo '✅ Deployment successful!'
         }
         failure {
-            echo 'Build or deployment failed!'
+            echo '❌ Build or deployment failed!'
         }
     }
 }
