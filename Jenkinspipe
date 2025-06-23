@@ -19,7 +19,23 @@ pipeline {
                 sh "${MAVEN_HOME}/bin/mvn clean package"
             }
         }
-
+        stage('SonarQube Analysis') {
+            steps {
+                // *** IMPORTANT: REPLACE 'YOUR_SONARQUBE_SERVER_NAME' BELOW ***
+                // This must be the EXACT NAME you configured for your SonarQube server in Jenkins
+                // (e.g., 'My SonarQube', 'Production SonarQube', etc.)
+                withSonarQubeEnv('Mysonar') {
+                    // *** IMPORTANT: REPLACE 'YOUR_PROJECT_KEY_HERE' BELOW ***
+                    // This is the UNIQUE identifier for your project in SonarQube.
+                    // Example: -Dsonar.projectKey=mahendra-app-web
+                    sh "${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:LATEST:sonar \\
+                        -Dsonar.projectKey=mahendra-webapp \\
+                        -Dsonar.projectName='Mahendra Project' \\ // You can adjust this display name
+                        -Dsonar.host.url=http://192.168.152.130:9000 \\
+                        -Dsonar.login=$SONAR_AUTH_TOKEN"
+                }
+            }
+        }
         stage('Test') {
             steps {
                 sh "${MAVEN_HOME}/bin/mvn test"
