@@ -12,6 +12,10 @@
         <maven.compiler.source>17</maven.compiler.source>  <maven.compiler.target>17</maven.compiler.target>  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>4.13.2</junit.version>
+         <sonar.projectKey>my-jenkins-project</sonar.projectKey>
+         <sonar.projectName>My Jenkins Project</sonar.projectName>
+         <sonar.projectVersion>1.0</sonar.projectVersion>
+         <sonar.host.url>http://192.168.152.130:9000</sonar.host.url>    
     </properties>
 
     <dependencies>
