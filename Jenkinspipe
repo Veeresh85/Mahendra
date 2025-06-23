@@ -28,11 +28,11 @@ pipeline {
                     // *** IMPORTANT: REPLACE 'YOUR_PROJECT_KEY_HERE' BELOW ***
                     // This is the UNIQUE identifier for your project in SonarQube.
                     // Example: -Dsonar.projectKey=mahendra-app-web
-                    sh "${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:LATEST:sonar \\
+                    sh '${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:LATEST:sonar \
                         -Dsonar.projectKey=mahendra-webapp \\
                         -Dsonar.projectName='Mahendra Project' \\ // You can adjust this display name
                         -Dsonar.host.url=http://192.168.152.130:9000 \\
-                        -Dsonar.login=$SONAR_AUTH_TOKEN"
+                        -Dsonar.login=$SONAR_AUTH_TOKEN'
                 }
             }
         }
