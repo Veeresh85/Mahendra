@@ -22,11 +22,11 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+       stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('Mysonar') {
             sh """
-                ${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.8.0.2856:sonar \\
+                ${MAVEN_HOME}/bin/mvn sonar:sonar \\
                 -Dsonar.projectKey=mahendra-webapp \\
                 -Dsonar.projectName='Mahendra Project' \\
                 -Dsonar.host.url=http://192.168.152.130:9000 \\
@@ -35,7 +35,6 @@ pipeline {
         }
     }
 }
-
         stage('Test') {
             steps {
                 sh "${MAVEN_HOME}/bin/mvn test"
