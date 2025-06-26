@@ -23,18 +23,18 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('Mysonar') {
-                    sh """
-                        ${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.2929:sonar \\
-                        -Dsonar.projectKey=mahendra-webapp \\
-                        -Dsonar.projectName='Mahendra Project' \\
-                        -Dsonar.host.url=http://192.168.152.130:9000 \\
-                        -Dsonar.login=${SONAR_AUTH_TOKEN}
-                    """
-                }
-            }
+    steps {
+        withSonarQubeEnv('Mysonar') {
+            sh """
+                ${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.8.0.2856:sonar \\
+                -Dsonar.projectKey=mahendra-webapp \\
+                -Dsonar.projectName='Mahendra Project' \\
+                -Dsonar.host.url=http://192.168.152.130:9000 \\
+                -Dsonar.login=${SONAR_AUTH_TOKEN}
+            """
         }
+    }
+}
 
         stage('Test') {
             steps {
