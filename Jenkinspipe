@@ -10,7 +10,9 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'a54b60a0-9355-42ad-8480-3df0d80408a4', url: 'https://github.com/Veeresh85/Mahendra.git'
+                git branch: 'main', 
+                    credentialsId: 'a54b60a0-9355-42ad-8480-3df0d80408a4', 
+                    url: 'https://github.com/Veeresh85/Mahendra.git'
             }
         }
 
@@ -19,23 +21,21 @@ pipeline {
                 sh "${MAVEN_HOME}/bin/mvn clean package"
             }
         }
+
         stage('SonarQube Analysis') {
             steps {
-                // *** IMPORTANT: REPLACE 'YOUR_SONARQUBE_SERVER_NAME' BELOW ***
-                // This must be the EXACT NAME you configured for your SonarQube server in Jenkins
-                // (e.g., 'My SonarQube', 'Production SonarQube', etc.)
                 withSonarQubeEnv('Mysonar') {
-                    // *** IMPORTANT: REPLACE 'YOUR_PROJECT_KEY_HERE' BELOW ***
-                    // This is the UNIQUE identifier for your project in SonarQube.
-                    // Example: -Dsonar.projectKey=mahendra-app-web
-                    sh '${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:LATEST:sonar \
+                    sh """
+                        ${MAVEN_HOME}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.2929:sonar \\
                         -Dsonar.projectKey=mahendra-webapp \\
-                        -Dsonar.projectName='Mahendra Project' \\ // You can adjust this display name
+                        -Dsonar.projectName='Mahendra Project' \\
                         -Dsonar.host.url=http://192.168.152.130:9000 \\
-                        -Dsonar.login=$SONAR_AUTH_TOKEN'
+                        -Dsonar.login=${SONAR_AUTH_TOKEN}
+                    """
                 }
             }
         }
+
         stage('Test') {
             steps {
                 sh "${MAVEN_HOME}/bin/mvn test"
@@ -44,21 +44,10 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                // Make sure Tomcat is stopped before deployment
-                sh "sudo -S ${TOMCAT_HOME}/bin/shutdown.sh || true"
-
-                // Change ownership if necessary
-                sh "sudo -S chown jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project.war || true"
-                sh "sudo -S chown -R jenkins:jenkins ${TOMCAT_HOME}/webapps/my-jenkins-project || true"
-
-                // Ensure proper permission
-                sh "sudo -S chmod 755 ${TOMCAT_HOME}/webapps"
-
-                // Deploy WAR
-                sh "cp target/*.war ${TOMCAT_HOME}/webapps/"
-
-                // Start Tomcat
-                sh 'echo "veeresh" | sudo -S ${TOMCAT_HOME}/bin/startup.sh'
+                sh "echo 'veeresh' | sudo -S ${TOMCAT_HOME}/bin/shutdown.sh || true"
+                sh "echo 'veeresh' | sudo -S cp target/*.war ${TOMCAT_HOME}/webapps/"
+                sh "echo 'veeresh' | sudo -S chmod -R 755 ${TOMCAT_HOME}/webapps"
+                sh "echo 'veeresh' | sudo -S ${TOMCAT_HOME}/bin/startup.sh"
             }
         }
     }
