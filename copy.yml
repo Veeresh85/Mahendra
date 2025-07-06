@@ -4,4 +4,4 @@
      - name: copy the file from local to remote
        copy:
          src: target/*.war
-         dest: /usr/local/apache-tomcat-9.0.107/webapps/
+         dest: /tmp/apache-tomcat-9.0.107/webapps/
