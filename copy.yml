@@ -3,5 +3,5 @@
    tasks:
      - name: copy the file from local to remote
        copy:
-         src: target/*.war
+         src: /var/lib/jenkins/workspace/sonar_ansible/target/*.war
          dest: /tmp/apache-tomcat-9.0.107/webapps/
