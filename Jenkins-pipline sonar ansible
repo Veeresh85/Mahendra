@@ -46,6 +46,7 @@ pipeline {
                ansiblePlaybook credentialsId: 'd9afccef-7d1a-40e3-b22b-99058659ebb4', installation: 'ansible2', inventory: 'dev.in', playbook: 'copy.yml', vaultCredentialsId: '90b0689e-772c-4d89-8e50-097f0c0342a4', vaultTmpPath: ''
                    }
     }
+    }
 
     post {
         success {
@@ -55,5 +56,4 @@ pipeline {
             echo '❌ Build or deployment failed!'
         }
     }
-}
 }
