@@ -1,5 +1,5 @@
 [awsnodes]
-3.87.213.242
+44.211.66.173
 
 [awsnodes:vars]
 ansible_user=ec2-user
